@@ -423,10 +423,10 @@ def write_metrics_csv(path, metrics):
 
 def add_common_args(parser):
     parser.add_argument('--model', default=default_model_path())
-    parser.add_argument('--rafce-test-img', default='RafceDataset/test/img')
-    parser.add_argument('--rafce-test-lbl', default='RafceDataset/test/pre-processing/RAFCE_emolabel.txt')
-    parser.add_argument('--rafce-train-img', default='RafceDataset/train/augmented_img')
-    parser.add_argument('--rafce-train-lbl', default='RafceDataset/train/after-processing/RAFCE_emolabel.txt')
+    parser.add_argument('--rafce-test-img', default='datasets/RafceDataset/test/img')
+    parser.add_argument('--rafce-test-lbl', default='datasets/RafceDataset/test/pre-processing/RAFCE_emolabel.txt')
+    parser.add_argument('--rafce-train-img', default='datasets/RafceDataset/train/augmented_img')
+    parser.add_argument('--rafce-train-lbl', default='datasets/RafceDataset/train/after-processing/RAFCE_emolabel.txt')
     parser.add_argument('--output-dir', default=str(THIS_DIR / 'outputs'))
     parser.add_argument('--batch-size', default=64, type=int)
     parser.add_argument('--device', default='cuda' if torch.cuda.is_available() else 'cpu', choices=['cuda', 'cpu'])

@@ -6,8 +6,8 @@ Generates a 2x3 figure:
 
 Usage:
   python gradcam_comparison.py
-  python gradcam_comparison.py --fer-img new_data/test/happy/PrivateTest_10077120.jpg
-                               --rafce-img other_data/test/img/0064.jpg
+  python gradcam_comparison.py --fer-img datasets/new_data/test/happy/PrivateTest_10077120.jpg
+                               --rafce-img datasets/other_data/test/img/0064.jpg
 """
 
 import argparse
@@ -164,7 +164,7 @@ def pick_emotion(emotion=None):
 
 
 def find_random_fer_image(emotion):
-    folder = Path('new_data/test') / emotion
+    folder = Path('datasets/new_data/test') / emotion
     candidates = [p for p in folder.iterdir() if p.suffix.lower() in {'.jpg', '.jpeg', '.png'}]
     if not candidates:
         raise FileNotFoundError('No images in %s' % folder)
@@ -302,8 +302,8 @@ def parse_args():
                    help='RAF-CE compound label index (optional, used with --rafce-img)')
     p.add_argument('--fer-checkpoint',  default='checkpoints/PrivateTest_model.t7')
     p.add_argument('--ft-checkpoint',   default='checkpoints/Best_model.t7')
-    p.add_argument('--rafce-test-img',  default='other_data/test/img')
-    p.add_argument('--rafce-test-lbl',  default='other_data/test/pre-processing/RAFCE_emolabel.txt')
+    p.add_argument('--rafce-test-img',  default='datasets/other_data/test/img')
+    p.add_argument('--rafce-test-lbl',  default='datasets/other_data/test/pre-processing/RAFCE_emolabel.txt')
     p.add_argument('--output',          default='outputs/gradcam_comparison.png')
     p.add_argument('--device',          default='cuda', choices=['cuda', 'cpu'])
     return p.parse_args()

@@ -2,7 +2,7 @@
 Grad-CAM visualization for FER2013 using the original private-test VGG19 checkpoint.
 
 Model: checkpoints/PrivateTest_model.t7
-Dataset: FER2013 PrivateTest split from dataset/data.h5
+Dataset: FER2013 PrivateTest split from datasets/data.h5
 Layer: net.features[33]
 """
 

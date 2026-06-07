@@ -7,7 +7,7 @@ Default inputs:
 
 ```text
 Model: checkpoints/PrivateTest_model.t7
-FER test dataset: FerDataset/test
+FER test dataset: datasets/FerDataset/test
 ```
 
 Run full evaluation:

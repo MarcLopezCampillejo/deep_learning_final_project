@@ -301,7 +301,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description='Evaluate FER test accuracy after centered black-square occlusion.')
     parser.add_argument('--model', default=default_model_path())
-    parser.add_argument('--fer-test-dir', default='FerDataset/test')
+    parser.add_argument('--fer-test-dir', default='datasets/FerDataset/test')
     parser.add_argument('--output-dir', default=str(THIS_DIR / 'outputs'))
     parser.add_argument('--batch-limit', default=None, type=int,
                         help='Optional limit for quick tests. Processes this many images total.')

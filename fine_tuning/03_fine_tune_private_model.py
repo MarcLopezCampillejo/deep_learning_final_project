@@ -124,8 +124,8 @@ def save_normalized_confusion(targets, predicted, output_dir, prefix):
 
 def main():
     parser = parse_common_args('Fine-tune VGG19 on mixed FER2013 + RAF-CE using the exact three-phase strategy.')
-    parser.add_argument('--fer-train-dir', default='FerDataset/train')
-    parser.add_argument('--fer-test-dir', default='FerDataset/test')
+    parser.add_argument('--fer-train-dir', default='datasets/FerDataset/train')
+    parser.add_argument('--fer-test-dir', default='datasets/FerDataset/test')
     parser.add_argument('--epochs-phase1', default=15, type=int)
     parser.add_argument('--epochs-phase2', default=10, type=int)
     parser.add_argument('--epochs-phase3', default=10, type=int)

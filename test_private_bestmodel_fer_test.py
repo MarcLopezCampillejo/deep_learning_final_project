@@ -1,5 +1,5 @@
 """
-Evaluate checkpoints/PrivateTest_model.t7 on FerDataset/test.
+Evaluate checkpoints/PrivateTest_model.t7 on datasets/FerDataset/test.
 
 Uses the same TenCrop test-time evaluation style as mainpro_FER.py and reports:
 - overall accuracy
@@ -198,9 +198,9 @@ def save_outputs(results, output_prefix):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Test PrivateTest_model.t7 on FerDataset/test.')
+    parser = argparse.ArgumentParser(description='Test PrivateTest_model.t7 on datasets/FerDataset/test.')
     parser.add_argument('--model', default='checkpoints/PrivateTest_model.t7')
-    parser.add_argument('--test-dir', default='FerDataset/test')
+    parser.add_argument('--test-dir', default='datasets/FerDataset/test')
     parser.add_argument('--batch-size', default=16, type=int)
     parser.add_argument('--max-samples', default=None, type=int,
                         help='Optional limit for quick tests. By default evaluates all test images.')

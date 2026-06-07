@@ -5,7 +5,7 @@ import os
 import numpy as np
 import h5py
 
-file = 'dataset/fer2013.csv'
+file = 'datasets/fer2013.csv'
 
 # Creat the list to store the data and label information
 Training_x = []
@@ -15,7 +15,7 @@ PublicTest_y = []
 PrivateTest_x = []
 PrivateTest_y = []
 
-datapath = os.path.join('dataset','data.h5')
+datapath = os.path.join('datasets','data.h5')
 if not os.path.exists(os.path.dirname(datapath)):
     os.makedirs(os.path.dirname(datapath))
 

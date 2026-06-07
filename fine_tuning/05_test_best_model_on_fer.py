@@ -5,7 +5,7 @@ Default model:
   fine_tuning/outputs/fine_tuned/Best_model.t7
 
 Default dataset:
-  FerDataset/test
+  datasets/FerDataset/test
 
 Reports loss, overall accuracy, macro accuracy, and per-class accuracy.
 """
@@ -202,7 +202,7 @@ def save_results(results, class_names, output_path):
 def parse_args():
     parser = argparse.ArgumentParser(description='Evaluate fine-tuned Best_model.t7 on FER test.')
     parser.add_argument('--model', default='outputs/fine_tuned/Best_model.t7')
-    parser.add_argument('--fer-test-dir', default='FerDataset/test')
+    parser.add_argument('--fer-test-dir', default='datasets/FerDataset/test')
     parser.add_argument('--batch-size', default=64, type=int)
     parser.add_argument('--output', default='outputs/fine_tuned/fer_test_best_model_metrics.csv')
     parser.add_argument('--device', default='cuda' if torch.cuda.is_available() else 'cpu',

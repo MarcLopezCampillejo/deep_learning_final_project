@@ -11,7 +11,7 @@ fine_tuning/PrivateTest_model.t7
 Expected local RAF-CE dataset path:
 
 ```text
-fine_tuning/RafceDataset
+datasets/RafceDataset
 ```
 
 If that file is not present, scripts fall back to:
@@ -23,10 +23,10 @@ checkpoints/PrivateTest_model.t7
 RAF-CE paths can be passed by argument. Defaults are resolved first from this folder:
 
 ```text
-RafceDataset/train/augmented_img
-RafceDataset/train/after-processing/RAFCE_emolabel.txt
-RafceDataset/test/img
-RafceDataset/test/pre-processing/RAFCE_emolabel.txt
+datasets/RafceDataset/train/augmented_img
+datasets/RafceDataset/train/after-processing/RAFCE_emolabel.txt
+datasets/RafceDataset/test/img
+datasets/RafceDataset/test/pre-processing/RAFCE_emolabel.txt
 ```
 
 ## 1. Inspect RAF-CE Mapping
@@ -74,7 +74,7 @@ python ".\fine_tuning\04_evaluate_finetuned_model.py" --fine-tuned-model ".\chec
 
 ## 5. Test Fine-Tuned Best Model On FER
 
-Evaluates `outputs/fine_tuned/Best_model.t7` on `FerDataset/test` and reports loss, overall accuracy, macro accuracy, and per-class accuracy.
+Evaluates `outputs/fine_tuned/Best_model.t7` on `datasets/FerDataset/test` and reports loss, overall accuracy, macro accuracy, and per-class accuracy.
 
 ```powershell
 python ".\fine_tuning\05_test_best_model_on_fer.py" --model ".\checkpoints\Best_model.t7"

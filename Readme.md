@@ -26,8 +26,8 @@ The code was developed for Python 3 and PyTorch.
 The submission includes:
 
 ```text
-dataset/fer2013.csv
-dataset/data.h5
+datasets/fer2013.csv
+datasets/data.h5
 checkpoints/PrivateTest_model.t7
 checkpoints/Best_model.t7
 ```
@@ -40,15 +40,15 @@ Checkpoint meaning:
 Some scripts also expect the following folders if RAF-CE or folder-based FER evaluation is executed:
 
 ```text
-FerDataset/test/
-fine_tuning/RafceDataset/
+datasets/FerDataset/test/
+datasets/RafceDataset/
 ```
 
 ## Folder Structure
 
 ```text
 .
-|-- dataset/
+|-- datasets/
 |-- checkpoints/
 |-- model_architectures/
 |-- image_transforms/
@@ -71,7 +71,7 @@ Run all commands from the root of this folder.
 
 ### 1. Preprocess FER2013
 
-This step is only needed if `dataset/data.h5` must be regenerated from `dataset/fer2013.csv`.
+This step is only needed if `datasets/data.h5` must be regenerated from `datasets/fer2013.csv`.
 
 ```powershell
 python preprocess_fer2013.py
@@ -168,4 +168,6 @@ python gradcam_comparison.py --fer-checkpoint ".\checkpoints\PrivateTest_model.t
 
 - `PrivateTest_model.t7` should be used for experiments before fine-tuning.
 - `Best_model.t7` should be used for experiments after fine-tuning.
+- Hay que poner los datasets dentro de la carpeta `datasets`.
+- Se creó un nuevo repositorio para la entrega.
 - The original datasets are not modified by the evaluation or occlusion scripts.
