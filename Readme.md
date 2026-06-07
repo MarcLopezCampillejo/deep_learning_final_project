@@ -168,6 +168,6 @@ python gradcam_comparison.py --fer-checkpoint ".\checkpoints\PrivateTest_model.t
 
 - `PrivateTest_model.t7` should be used for experiments before fine-tuning.
 - `Best_model.t7` should be used for experiments after fine-tuning.
-- Hay que poner los datasets dentro de la carpeta `datasets`.
-- Se creó un nuevo repositorio para la entrega.
+- All datasets must be placed inside the `datasets` folder.
+- A new repository was created for the submission.
 - The original datasets are not modified by the evaluation or occlusion scripts.
