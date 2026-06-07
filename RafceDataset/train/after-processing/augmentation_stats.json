@@ -1,0 +1,67 @@
+{
+  "0": {
+    "original": 394,
+    "needed": 188,
+    "generated": 188
+  },
+  "1": {
+    "original": 171,
+    "needed": 411,
+    "generated": 411
+  },
+  "2": {
+    "original": 109,
+    "needed": 473,
+    "generated": 473
+  },
+  "3": {
+    "original": 136,
+    "needed": 446,
+    "generated": 446
+  },
+  "4": {
+    "original": 71,
+    "needed": 511,
+    "generated": 511
+  },
+  "5": {
+    "original": 495,
+    "needed": 87,
+    "generated": 87
+  },
+  "6": {
+    "original": 120,
+    "needed": 462,
+    "generated": 462
+  },
+  "7": {
+    "original": 352,
+    "needed": 230,
+    "generated": 230
+  },
+  "8": {
+    "original": 24,
+    "needed": 558,
+    "generated": 558
+  },
+  "9": {
+    "original": 124,
+    "needed": 458,
+    "generated": 458
+  },
+  "11": {
+    "original": 108,
+    "needed": 474,
+    "generated": 474
+  },
+  "12": {
+    "original": 6,
+    "needed": 576,
+    "generated": 576
+  },
+  "13": {
+    "original": 17,
+    "needed": 565,
+    "generated": 565
+  }
+}

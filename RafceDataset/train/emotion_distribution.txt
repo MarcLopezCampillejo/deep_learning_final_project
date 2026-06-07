@@ -1,0 +1,21 @@
+Distribution des Émotions - TRAIN
+======================================================================
+
+Total d'images: 2709
+
+Classe  Émotion                     Count      Pourcentage
+----------------------------------------------------------------------
+0       Happily Surprised           394        14.54%
+1       Happily Disgusted           171         6.31%
+2       Sadly Fearful               109         4.02%
+3       Sadly Angry                 136         5.02%
+4       Sadly Surprised             71          2.62%
+5       Sadly Disgusted             495        18.27%
+6       Fearfully Angry             120         4.43%
+7       Fearfully Surprised         352        12.99%
+8       Angrily Surprised           24          0.89%
+9       Angrily Disgusted           124         4.58%
+10      Disgustedly Surprised       582        21.48%
+11      Appalled                    108         3.99%
+12      Hatred                      6           0.22%
+13      Awed                        17          0.63%

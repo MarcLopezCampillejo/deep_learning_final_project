@@ -1,0 +1,15 @@
+class_id,emotion_label,count,percentage
+0,Happily Surprised,582,7.14
+1,Happily Disgusted,582,7.14
+2,Sadly Fearful,582,7.14
+3,Sadly Angry,582,7.14
+4,Sadly Surprised,582,7.14
+5,Sadly Disgusted,582,7.14
+6,Fearfully Angry,582,7.14
+7,Fearfully Surprised,582,7.14
+8,Angrily Surprised,582,7.14
+9,Angrily Disgusted,582,7.14
+10,Disgustedly Surprised,582,7.14
+11,Appalled,582,7.14
+12,Hatred,582,7.14
+13,Awed,582,7.14
