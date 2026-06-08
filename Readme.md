@@ -30,12 +30,19 @@ datasets/fer2013.csv
 datasets/data.h5
 checkpoints/PrivateTest_model.t7
 checkpoints/Best_model.t7
+project_report_final.pdf
+final_project_theta_slides.pdf
 ```
 
 Checkpoint meaning:
 
 - `checkpoints/PrivateTest_model.t7`: original FER2013 model before fine-tuning.
 - `checkpoints/Best_model.t7`: best fine-tuned model trained with the mixed FER2013 + RAF-CE strategy.
+
+Final deliverables:
+
+- `project_report_final.pdf`: final project report.
+- `final_project_theta_slides.pdf`: final project slides.
 
 Some scripts also expect the following folders if RAF-CE or folder-based FER evaluation is executed:
 
