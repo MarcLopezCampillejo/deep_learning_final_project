@@ -24,6 +24,7 @@ from common import (
     train_one_epoch_mixed,
     validate_mixed,
 )
+from dataset_paths import FER_TEST_DIR, FER_TRAIN_DIR
 
 
 def append_metrics(output_dir, epoch, phase, lr, train_m, fer_m, rafce_m):
@@ -124,8 +125,8 @@ def save_normalized_confusion(targets, predicted, output_dir, prefix):
 
 def main():
     parser = parse_common_args('Fine-tune VGG19 on mixed FER2013 + RAF-CE using the exact three-phase strategy.')
-    parser.add_argument('--fer-train-dir', default='datasets/FerDataset/train')
-    parser.add_argument('--fer-test-dir', default='datasets/FerDataset/test')
+    parser.add_argument('--fer-train-dir', default=str(FER_TRAIN_DIR))
+    parser.add_argument('--fer-test-dir', default=str(FER_TEST_DIR))
     parser.add_argument('--epochs-phase1', default=15, type=int)
     parser.add_argument('--epochs-phase2', default=10, type=int)
     parser.add_argument('--epochs-phase3', default=10, type=int)

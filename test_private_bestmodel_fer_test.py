@@ -1,5 +1,5 @@
 """
-Evaluate checkpoints/PrivateTest_model.t7 on datasets/FerDataset/test.
+Evaluate checkpoints/PrivateTest_model.t7 on FerDataset/test.
 
 Uses the same TenCrop test-time evaluation style as mainpro_FER.py and reports:
 - overall accuracy
@@ -19,6 +19,7 @@ import torch.nn as nn
 from PIL import Image
 
 import transforms as transforms
+from dataset_paths import FER_TEST_DIR, resolve_dataset_path
 from model_architectures import VGG
 
 
@@ -30,7 +31,7 @@ CUT_SIZE = 44
 
 class FERFolderTestDataset(torch.utils.data.Dataset):
     def __init__(self, root_dir, transform=None, max_samples=None):
-        self.root_dir = Path(root_dir)
+        self.root_dir = resolve_dataset_path(root_dir)
         self.transform = transform
         self.images = []
         self.labels = []
@@ -198,9 +199,9 @@ def save_outputs(results, output_prefix):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Test PrivateTest_model.t7 on datasets/FerDataset/test.')
+    parser = argparse.ArgumentParser(description='Test PrivateTest_model.t7 on FerDataset/test.')
     parser.add_argument('--model', default='checkpoints/PrivateTest_model.t7')
-    parser.add_argument('--test-dir', default='datasets/FerDataset/test')
+    parser.add_argument('--test-dir', default=str(FER_TEST_DIR))
     parser.add_argument('--batch-size', default=16, type=int)
     parser.add_argument('--max-samples', default=None, type=int,
                         help='Optional limit for quick tests. By default evaluates all test images.')

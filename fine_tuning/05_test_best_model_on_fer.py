@@ -5,7 +5,7 @@ Default model:
   fine_tuning/outputs/fine_tuned/Best_model.t7
 
 Default dataset:
-  datasets/FerDataset/test
+  FerDataset/test
 
 Reports loss, overall accuracy, macro accuracy, and per-class accuracy.
 """
@@ -28,6 +28,7 @@ if str(PROJECT_DIR) not in sys.path:
     sys.path.insert(0, str(PROJECT_DIR))
 
 import transforms.transforms as transforms
+from dataset_paths import FER_TEST_DIR, resolve_dataset_path
 from model_architectures.vgg import VGG
 
 
@@ -37,7 +38,7 @@ IMAGE_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.bmp'}
 
 def resolve_path(path):
     raw = Path(path)
-    candidates = [raw, THIS_DIR / raw, PROJECT_DIR / raw]
+    candidates = [resolve_dataset_path(raw, THIS_DIR), raw, THIS_DIR / raw, PROJECT_DIR / raw]
     for candidate in candidates:
         if candidate.exists():
             return candidate
@@ -202,7 +203,7 @@ def save_results(results, class_names, output_path):
 def parse_args():
     parser = argparse.ArgumentParser(description='Evaluate fine-tuned Best_model.t7 on FER test.')
     parser.add_argument('--model', default='outputs/fine_tuned/Best_model.t7')
-    parser.add_argument('--fer-test-dir', default='datasets/FerDataset/test')
+    parser.add_argument('--fer-test-dir', default=str(FER_TEST_DIR))
     parser.add_argument('--batch-size', default=64, type=int)
     parser.add_argument('--output', default='outputs/fine_tuned/fer_test_best_model_metrics.csv')
     parser.add_argument('--device', default='cuda' if torch.cuda.is_available() else 'cpu',

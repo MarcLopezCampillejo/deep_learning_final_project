@@ -30,6 +30,7 @@ if str(PROJECT_DIR) not in sys.path:
     sys.path.insert(0, str(PROJECT_DIR))
 
 import transforms.transforms as transforms
+from dataset_paths import FER_TEST_DIR, resolve_dataset_path
 from model_architectures.vgg import VGG
 
 
@@ -45,7 +46,7 @@ def default_model_path():
 
 def resolve_path(path):
     raw = Path(path)
-    candidates = [raw, PROJECT_DIR / raw, THIS_DIR / raw]
+    candidates = [resolve_dataset_path(raw, THIS_DIR), raw, PROJECT_DIR / raw, THIS_DIR / raw]
     for candidate in candidates:
         if candidate.exists():
             return candidate
@@ -301,7 +302,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description='Evaluate FER test accuracy after centered black-square occlusion.')
     parser.add_argument('--model', default=default_model_path())
-    parser.add_argument('--fer-test-dir', default='datasets/FerDataset/test')
+    parser.add_argument('--fer-test-dir', default=str(FER_TEST_DIR))
     parser.add_argument('--output-dir', default=str(THIS_DIR / 'outputs'))
     parser.add_argument('--batch-limit', default=None, type=int,
                         help='Optional limit for quick tests. Processes this many images total.')

@@ -6,8 +6,8 @@ Generates a 2x3 figure:
 
 Usage:
   python gradcam_comparison.py
-  python gradcam_comparison.py --fer-img datasets/new_data/test/happy/PrivateTest_10077120.jpg
-                               --rafce-img datasets/other_data/test/img/0064.jpg
+  python gradcam_comparison.py --fer-img FerDataset/test/happy/PrivateTest_10077120.jpg
+                               --rafce-img RafceDataset/test/img/0064.jpg
 """
 
 import argparse
@@ -24,6 +24,12 @@ import torch.nn.functional as F
 from PIL import Image
 
 import image_transforms.transforms as transforms
+from dataset_paths import (
+    FER_TEST_DIR,
+    RAFCE_TEST_IMG_DIR,
+    RAFCE_TEST_LABEL_FILE,
+    resolve_dataset_path,
+)
 from model_architectures.vgg import VGG
 
 # ── constants ──────────────────────────────────────────────────────────────
@@ -104,6 +110,7 @@ class GradCAM:
 # ── model helpers ──────────────────────────────────────────────────────────
 def load_model(checkpoint_path, device, num_classes=7):
     net = VGG('VGG19')
+    checkpoint_path = resolve_dataset_path(checkpoint_path)
     ckpt = torch.load(checkpoint_path, map_location=device)
     state = ckpt['net'] if isinstance(ckpt, dict) and 'net' in ckpt else ckpt
     if isinstance(state, torch.nn.Module):
@@ -123,6 +130,7 @@ transform_infer = transforms.Compose([
 
 
 def load_image_tensor(path, device):
+    path = resolve_dataset_path(path)
     img_pil = Image.open(path).convert('L').convert('RGB')
     tensor  = transform_infer(img_pil).unsqueeze(0).to(device)
     return tensor
@@ -130,6 +138,7 @@ def load_image_tensor(path, device):
 
 def to_display(path):
     """Return a uint8 RGB numpy array sized for display."""
+    path = resolve_dataset_path(path)
     img = Image.open(path).convert('RGB').resize((224, 224), BILINEAR)
     return np.array(img)
 
@@ -164,7 +173,7 @@ def pick_emotion(emotion=None):
 
 
 def find_random_fer_image(emotion):
-    folder = Path('datasets/new_data/test') / emotion
+    folder = resolve_dataset_path(FER_TEST_DIR) / emotion
     candidates = [p for p in folder.iterdir() if p.suffix.lower() in {'.jpg', '.jpeg', '.png'}]
     if not candidates:
         raise FileNotFoundError('No images in %s' % folder)
@@ -175,6 +184,8 @@ def find_random_rafce_image(emotion, label_file, img_dir):
     fer_idx = FER_CLASS_NAMES.index(emotion)
     matching = FER_TO_RAFCE.get(fer_idx, [])
     candidates = []
+    label_file = resolve_dataset_path(label_file)
+    img_dir = resolve_dataset_path(img_dir)
     with open(label_file, encoding='utf-8') as fh:
         for line in fh:
             parts = line.strip().split()
@@ -302,8 +313,8 @@ def parse_args():
                    help='RAF-CE compound label index (optional, used with --rafce-img)')
     p.add_argument('--fer-checkpoint',  default='checkpoints/PrivateTest_model.t7')
     p.add_argument('--ft-checkpoint',   default='checkpoints/Best_model.t7')
-    p.add_argument('--rafce-test-img',  default='datasets/other_data/test/img')
-    p.add_argument('--rafce-test-lbl',  default='datasets/other_data/test/pre-processing/RAFCE_emolabel.txt')
+    p.add_argument('--rafce-test-img',  default=str(RAFCE_TEST_IMG_DIR))
+    p.add_argument('--rafce-test-lbl',  default=str(RAFCE_TEST_LABEL_FILE))
     p.add_argument('--output',          default='outputs/gradcam_comparison.png')
     p.add_argument('--device',          default='cuda', choices=['cuda', 'cpu'])
     return p.parse_args()
@@ -327,9 +338,9 @@ def main():
     print('Loading fine-tuned mixed model...')
     model_ft = load_model(opt.ft_checkpoint, device)
 
-    fer_path = opt.fer_img or find_random_fer_image(emotion)
+    fer_path = str(resolve_dataset_path(opt.fer_img)) if opt.fer_img else find_random_fer_image(emotion)
     if opt.rafce_img:
-        rafce_path = opt.rafce_img
+        rafce_path = str(resolve_dataset_path(opt.rafce_img))
         rafce_label = opt.rafce_label if opt.rafce_label is not None else \
                       FER_TO_RAFCE[FER_CLASS_NAMES.index(emotion)][0]
     else:

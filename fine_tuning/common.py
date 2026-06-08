@@ -28,6 +28,13 @@ if str(PROJECT_DIR) not in sys.path:
 
 import transforms.transforms as transforms
 import utils
+from dataset_paths import (
+    RAFCE_TEST_IMG_DIR,
+    RAFCE_TEST_LABEL_FILE,
+    RAFCE_TRAIN_IMG_DIR,
+    RAFCE_TRAIN_LABEL_FILE,
+    resolve_dataset_path,
+)
 from model_architectures.vgg import VGG
 
 
@@ -65,6 +72,7 @@ BLOCK5_START = 40
 def resolve_path(path):
     raw = Path(path)
     candidates = [
+        resolve_dataset_path(raw),
         THIS_DIR / raw,
         raw,
         PROJECT_DIR / raw,
@@ -423,10 +431,10 @@ def write_metrics_csv(path, metrics):
 
 def add_common_args(parser):
     parser.add_argument('--model', default=default_model_path())
-    parser.add_argument('--rafce-test-img', default='datasets/RafceDataset/test/img')
-    parser.add_argument('--rafce-test-lbl', default='datasets/RafceDataset/test/pre-processing/RAFCE_emolabel.txt')
-    parser.add_argument('--rafce-train-img', default='datasets/RafceDataset/train/augmented_img')
-    parser.add_argument('--rafce-train-lbl', default='datasets/RafceDataset/train/after-processing/RAFCE_emolabel.txt')
+    parser.add_argument('--rafce-test-img', default=str(RAFCE_TEST_IMG_DIR))
+    parser.add_argument('--rafce-test-lbl', default=str(RAFCE_TEST_LABEL_FILE))
+    parser.add_argument('--rafce-train-img', default=str(RAFCE_TRAIN_IMG_DIR))
+    parser.add_argument('--rafce-train-lbl', default=str(RAFCE_TRAIN_LABEL_FILE))
     parser.add_argument('--output-dir', default=str(THIS_DIR / 'outputs'))
     parser.add_argument('--batch-size', default=64, type=int)
     parser.add_argument('--device', default='cuda' if torch.cuda.is_available() else 'cpu', choices=['cuda', 'cpu'])
